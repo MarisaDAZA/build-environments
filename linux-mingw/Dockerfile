@@ -10,6 +10,8 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && mkdir -p /tmp/pkgs && \
     echo "Server = https://martchus.no-ip.biz/repo/arch/ownstuff/os/\$arch" >> /etc/pacman.conf && \
     pacman -Syu --noconfirm && \
     pacman -Syu --noconfirm && \
+    # fakeroot v1.35-v1.36 is broken.
+    pacman -U --noconfirm https://archive.archlinux.org/packages/f/fakeroot/fakeroot-1.34-1-x86_64.pkg.tar.zst && \
     pacman -S --needed --noconfirm --noprogressbar \
     base-devel \
     clang \
@@ -49,7 +51,7 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && mkdir -p /tmp/pkgs && \
 
 # Install Boost from yuzu-emu/ext-linux-bin
 RUN wget --no-verbose \
-        https://github.com/yuzu-emu/ext-linux-bin/raw/main/mingw/mingw-w64-boost-1.79.0-1-any.pkg.tar.zst && \
+        https://github.com/yuzu-emu-mirror/ext-linux-bin/raw/main/mingw/mingw-w64-boost-1.79.0-1-any.pkg.tar.zst && \
     pacman -U --noconfirm mingw-w64-boost-1.79.0-1-any.pkg.tar.zst && \
     rm mingw-w64-boost-1.79.0-1-any.pkg.tar.zst
 
