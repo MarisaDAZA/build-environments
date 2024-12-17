@@ -12,6 +12,11 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && mkdir -p /tmp/pkgs && \
     pacman -Syu --noconfirm && \
     # fakeroot v1.35-v1.36 is broken.
     pacman -U --noconfirm https://archive.archlinux.org/packages/f/fakeroot/fakeroot-1.34-1-x86_64.pkg.tar.zst && \
+    # cmake v3.28-v3.31 is failed.
+     # CMake Error at /usr/share/cmake/Modules/Platform/Windows-GNU.cmake:17 (cmake_host_system_information):
+     #  cmake_host_system_information does not recognize <key> MSYSTEM_PREFIX
+    pacman -U --noconfirm https://archive.archlinux.org/packages/j/jsoncpp/jsoncpp-1.9.5-3-x86_64.pkg.tar.zst && \
+    pacman -U --noconfirm https://archive.archlinux.org/packages/c/cmake/cmake-3.27.9-1-x86_64.pkg.tar.zst && \
     pacman -S --needed --noconfirm --noprogressbar \
     base-devel \
     clang \
@@ -28,7 +33,6 @@ RUN useradd -m -u 1027 -s /bin/bash yuzu && mkdir -p /tmp/pkgs && \
     python \
     ccache \
     p7zip \
-    cmake \
     ninja \
     mingw-w64-gcc \
     mingw-w64-libusb \
